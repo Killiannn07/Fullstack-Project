@@ -1,4 +1,3 @@
-const pool = require("../config/db");
 const cartService = require("../services/cart.service");
 const { successResponse, errorResponse } = require("../utils/response");
 
