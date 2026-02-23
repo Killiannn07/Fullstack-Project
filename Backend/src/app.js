@@ -1,5 +1,7 @@
 const express = require("express")
 
+const cors = require('cors')
+
 const app = express()
 
 const productRoute = require('./routes/product.route')
@@ -12,6 +14,7 @@ const orderRoute = require('./routes/order.route')
 const { errorResponse } = require("./utils/response")
 
 app.use(express.json())
+app.use(cors())
 app.use("/products", productRoute)
 app.use("/auth", authRoute)
 app.use("/cart", cartRoute)

@@ -24,7 +24,8 @@ async function loginUser(email, password) {
   const isMatch = await comparePassword(password, user.password);
 
   if (!isMatch) {
-    return errorResponse(res, "Invalid email or password");
+    throw new Error("Invalid email or password");
+    
   }
 
   const token = generateToken({
@@ -33,7 +34,7 @@ async function loginUser(email, password) {
     role: user.role,
   });
 
-  return token;
+  return {token, user: {id: user.id, email: user.email, role: user.role}}
 }
 
 module.exports = { registerUser, loginUser };

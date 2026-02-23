@@ -45,8 +45,8 @@ async function getAllOrders(req, res) {
 
 async function checkout(req, res) {
   try {
-    id = Number(req.params.id);
-    const result = await orderService.checkout(id);
+    const userId = req.user.id;
+    const result = await orderService.checkout(userId);
 
     return successResponse(res, "Checkout done", result);
   } catch (error) {

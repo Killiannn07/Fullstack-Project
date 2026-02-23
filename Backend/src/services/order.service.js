@@ -36,8 +36,10 @@ async function checkout(userId) {
     //Hitung total harga
     let totalPrice = 0;
     for (const item of cartItems) {
+      if(!item.price || !item.quantity){
+        throw new Error("Invalid cart data");
+      }
       totalPrice += item.price * item.quantity;
-      console.log(totalPrice)
     }
 
     //create order

@@ -5,7 +5,7 @@ const { getOrders, getOrderDetail,updateStatus, getAllOrders, checkout } = requi
 const roleMiddleware = require("../middlewares/role.middleware");
 
 router.get("/:id", authMiddleware, getOrders);
-router.post("/:id", authMiddleware, checkout);
+router.post("/checkout", authMiddleware, checkout);
 router.get("/orderdetail/:orderId", authMiddleware, getOrderDetail);
 router.patch("/:orderId/status", authMiddleware,roleMiddleware("admin"), updateStatus);
 router.get("/admin/all", authMiddleware,roleMiddleware("admin"), getAllOrders);
