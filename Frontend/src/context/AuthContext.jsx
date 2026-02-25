@@ -16,6 +16,15 @@ export function AuthProvider({ children }) {
       setUser(JSON.parse(storedUser));
     }
     setLoading(false);
+
+    // Listen to logout event (from axios interceptor or other sources)
+    const handleLogout = () => {
+      setToken(null);
+      setUser(null);
+    };
+
+    window.addEventListener("auth:logout", handleLogout);
+    return () => window.removeEventListener("auth:logout", handleLogout);
   }, []);
 
   const login = (token, user) => {

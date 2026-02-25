@@ -1,18 +1,36 @@
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useCart } from "../context/CartContext";
+import { useState } from "react";
 
 function Cart() {
-  const { cart, updateCart, removeCart } = useCart();
+  const { cart, updateCart, removeCart, fetchCart } = useCart();
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleCheckout = async () => {
     try {
+      setLoading(true)
       const res = await api.post("/order/checkout");
+      await fetchCart()
+      navigate("/orders")
       console.log("Checkout berhasil:", res.data);
-      // Redirect atau tampilkan success message
     } catch (error) {
       console.error("Checkout gagal:", error.response?.data?.message);
     }
+    finally{
+      setLoading(false)
+    }
   };
+
+  if (!cart.length) {
+    return (
+      <div>
+        <p>Your cart is empty</p>
+        <Link to={"/products"}>Go Shopping</Link>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -36,10 +54,11 @@ function Cart() {
         </div>
       ))}
 
-      <button disabled={!cart.length} onClick={handleCheckout}>
-        Checkout
+      <button disabled={loading} onClick={handleCheckout}>
+        {loading ? "Processing" : "Checkout"}
       </button>
     </div>
+    
   );
 }
 

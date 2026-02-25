@@ -22,9 +22,12 @@ api.interceptors.response.use(
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       console.log("401 triggered");
-
-      if (window.location.pathname !== "/") {
-        window.location.href = "/";
+      
+      // Trigger logout event untuk update AuthContext
+      window.dispatchEvent(new Event("auth:logout"));
+      
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
       }
     }
 

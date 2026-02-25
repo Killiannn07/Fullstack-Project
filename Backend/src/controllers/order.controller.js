@@ -3,7 +3,7 @@ const orderService = require("../services/order.service");
 
 async function getOrders(req, res) {
   try {
-    userId = Number(req.params.id)
+    userId = req.user.id
     const orders = await orderService.getOrdersByUser(userId);
 
     return successResponse(res, "Orders Fetched", orders);

@@ -14,7 +14,7 @@ function Login() {
       const res = await api.post("/auth/login", { email, password });
       const {token, user} = res.data.data
       login(token, user)
-      navigate("/products");
+      navigate("/");
     } catch (error) {
       console.log(error.response?.data?.message);
     }

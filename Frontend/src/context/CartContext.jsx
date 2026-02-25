@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../api/axios";
+import { AuthContext } from "./AuthContext";
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const { token } = useContext(AuthContext);
 
   const fetchCart = async () => {
     try {
@@ -16,8 +18,11 @@ export function CartProvider({ children }) {
   };
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    // Hanya fetch cart jika user sudah login (ada token)
+    if (token) {
+      fetchCart();
+    }
+  }, [token]);
 
   const addToCart = async (productId, quantity) => {
     await api.post("/cart", { productId, quantity });
