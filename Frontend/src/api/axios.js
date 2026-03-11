@@ -21,7 +21,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      console.log("401 triggered");
+      console.error("401 trigerred")
       
       // Trigger logout event untuk update AuthContext
       window.dispatchEvent(new Event("auth:logout"));

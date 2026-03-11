@@ -5,7 +5,7 @@ async function register(req, res, next) {
   try {
     const { email, password } = req.body;
 
-    if ((!email, !password)) {
+    if (!email || !password) {
       return errorResponse(res, "Email and password required");
     }
 
@@ -13,7 +13,7 @@ async function register(req, res, next) {
 
     return successResponse(res, "Register Success", user, 201);
   } catch (error) {
-    return errorResponse(res, "Internal server error", 500);
+    return errorResponse(res, error.message || "Internal server error", 500);
   }
 }
 
@@ -21,15 +21,15 @@ async function login(req, res, next) {
   try {
     const { email, password } = req.body;
 
-    if ((!email, !password)) {
-      return errorResponse(res, "Email and password required");
+    if (!email || !password) {
+      return errorResponse(res, "Email and password required", 400);
     }
 
     const user = await authService.loginUser(email, password);
 
-    return successResponse(res, "Login Success", user, 201);
+    return successResponse(res, "Login Success", user, 200);
   } catch (error) {
-    return errorResponse(res, "Internal server error", 500);
+    return errorResponse(res, error.message || "Internal server error", 401);
   }
 }
 

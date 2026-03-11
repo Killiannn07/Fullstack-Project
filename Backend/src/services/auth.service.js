@@ -1,13 +1,12 @@
 const userService = require("./user.service");
 const { hashPassword, comparePassword } = require("../utils/password");
-const { successResponse, errorResponse } = require("../utils/response");
 const { generateToken } = require("../utils/token");
 
 async function registerUser(email, password) {
   const existingUser = await userService.getUsersByEmail(email);
 
   if (existingUser) {
-    return errorResponse(res, "Email already existing", 400);
+    throw new Error("Email already existing");
   }
 
   const hashedPassword = await hashPassword(password);
@@ -18,7 +17,8 @@ async function registerUser(email, password) {
 async function loginUser(email, password) {
   const user = await userService.getUsersByEmail(email);
   if (!user) {
-    return errorResponse(res, "Invalid email or password");
+    throw new Error("Invalid email or password");
+    
   }
 
   const isMatch = await comparePassword(password, user.password);
