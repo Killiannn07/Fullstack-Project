@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
+import { formatCurrencyRp } from "../utils/formatCurrency";
 
 function Cart() {
   const { cart, updateCart, removeCart, fetchCart } = useCart();
@@ -49,7 +50,7 @@ function Cart() {
             {" "}
             +{" "}
           </button>
-          <p>Rp {item.price}</p>
+          <p>{formatCurrencyRp(item.price)}</p>
           <button onClick={() => removeCart(item.id)}>Remove</button>
         </div>
       ))}

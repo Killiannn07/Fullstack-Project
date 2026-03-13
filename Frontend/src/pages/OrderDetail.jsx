@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/axios";
+import { formatCurrencyRp } from "../utils/formatCurrency";
 
 function OrderDetail(){
     const {orderId} = useParams()
@@ -28,8 +29,8 @@ function OrderDetail(){
                 <div key={item.product_id}>
                     <p>{item.name}</p>
                     <p>Qty: {item.quantity}</p>
-                    <p>Price: Rp.{item.price_at_purchase}</p>
-                    <p>Total: Rp.{item.price_at_purchase * item.quantity}</p>
+                    <p>Price: {formatCurrencyRp(item.price_at_purchase)}</p>
+                    <p>Total: {formatCurrencyRp(item.price_at_purchase * item.quantity)}</p>
                 </div>
             ))}
         </div>

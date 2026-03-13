@@ -15,10 +15,10 @@ async function getProductById(id) {
   return result.rows[0];
 }
 
-async function createProduct(name, price, stock) {
+async function createProduct(name, price, stock, image_url) {
   const result = await pool.query(
-    "INSERT INTO products (name, price, stock) VALUES ($1, $2, $3) RETURNING *",
-    [name, price, stock],
+    "INSERT INTO products (name, price, stock, image_url) VALUES ($1, $2, $3, $4) RETURNING *",
+    [name, price, stock, image_url],
   );
   return result.rows[0];
 }
@@ -32,11 +32,12 @@ async function updateProduct(id, data) {
   
   const updateName = data.name ?? product.name
   const updatePrice = data.price ?? product.price
-  const updtaeStock = data.stock ?? product.stock
+  const updateStock = data.stock ?? product.stock
+  const updateImageUrl = data.image_url ?? product.image_url
   
   const result = await pool.query(
-    "UPDATE products SET name = $1, price = $2, stock = $3 WHERE id=$4 RETURNING *",
-    [updateName, updatePrice, updtaeStock, id],
+    "UPDATE products SET name = $1, price = $2, stock = $3, image_url = $4 WHERE id=$5 RETURNING *",
+    [updateName, updatePrice, updateStock, updateImageUrl, id],
   );
   return result.rows[0];
 }

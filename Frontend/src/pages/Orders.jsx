@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import api from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { formatCurrencyRp } from "../utils/formatCurrency";
 
 function Orders() {
   const { user } = useContext(AuthContext);
@@ -33,7 +34,7 @@ function Orders() {
         <div key={order.id}>
           <p>Order #{order.id}</p>
           <p>Status: {order.status}</p>
-          <p>Total: Rp {order.total_price}</p>
+          <p>Total: {formatCurrencyRp(order.total_price)}</p>
 
           <Link to={`/orders/${order.id}`}>Detail</Link>
         </div>

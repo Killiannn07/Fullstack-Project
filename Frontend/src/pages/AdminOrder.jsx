@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { formatCurrencyRp } from "../utils/formatCurrency";
 
 export default function AdminOrder() {
   const [orders, setOrders] = useState([]);
@@ -32,7 +33,7 @@ export default function AdminOrder() {
         <div key={o.id}>
           <p>Order #{o.id}</p>
           <p>User{o.user_id}</p>
-          <p>Total: Rp{o.total_price}</p>
+          <p>Total: {formatCurrencyRp(o.total_price)}</p>
 
           <select
             style={{

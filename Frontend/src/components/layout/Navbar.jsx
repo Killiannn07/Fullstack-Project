@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import { useApp } from "../../context/AppContext";
 import Button from "../ui/Button";
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
   const { cart } = useCart();
+  const { logo, logoAlt } = useApp();
   const navigate = useNavigate();
 
   const totalitems = user && cart ? cart.length : 0;
@@ -21,10 +23,8 @@ function Navbar() {
       <div className="bg-third shadow-xl max-w-6xl w-full rounded-lg px-4 py-3 flex justify-between items-center">
         {user ? (
           <>
-            <div className="text-sm text-black">
-              {user.email}
-              <span className="text-gray">({user.role})</span>
-            </div>
+            <img src={logo} alt={logoAlt} className="h-8 w-auto" />
+            
             <div className="hidden md:flex w-1/2 items-center">
               <input
                 type="text"
@@ -46,7 +46,7 @@ function Navbar() {
           </>
         ) : (
           <>
-            <div className="text-lg text-white font-bold">Ian Shop</div>
+            <img src={logo} alt={logoAlt} className="h-8 w-auto" />
             <div className="hidden md:flex w-1/2 items-center">
               <input
                 type="text"

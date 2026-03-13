@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A2E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C9A96E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E8C98A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A67C52;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="32" height="32" rx="7" fill="url(#bgGrad)"/>
+
+  <!-- Corner accents top-left -->
+  <line x1="4" y1="9" x2="4" y2="4" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <line x1="4" y1="4" x2="9" y2="4" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Corner accents top-right -->
+  <line x1="28" y1="4" x2="23" y2="4" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <line x1="28" y1="4" x2="28" y2="9" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Corner accents bottom-left -->
+  <line x1="4" y1="23" x2="4" y2="28" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <line x1="4" y1="28" x2="9" y2="28" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Corner accents bottom-right -->
+  <line x1="28" y1="23" x2="28" y2="28" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <line x1="28" y1="28" x2="23" y2="28" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Letter I -->
+  <text x="16" y="22"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="20"
+    font-weight="400"
+    font-style="italic"
+    fill="url(#goldGrad)"
+    text-anchor="middle">I</text>
+</svg>

@@ -24,9 +24,14 @@ export function CartProvider({ children }) {
     }
   }, [token]);
 
-  const addToCart = async (productId, quantity) => {
-    await api.post("/cart", { productId, quantity });
-    fetchCart();
+  const addToCart = async (productId, quantity = 1) => {
+    try {
+      await api.post("/cart", { product_id: productId, quantity });
+      await fetchCart();
+    } catch (error) {
+      console.error(error.response?.data?.message || "Failed to add to cart");
+      throw error;
+    }
   };
 
   const updateCart = async (cartId, quantity) => {
