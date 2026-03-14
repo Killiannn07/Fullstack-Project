@@ -25,15 +25,20 @@ function Navbar() {
           <>
             <img src={logo} alt={logoAlt} className="h-8 w-auto" />
             
-            <div className="hidden md:flex w-1/2 items-center">
+            <nav className="hidden md:flex w-1/2 items-center gap-20 justify-center py-2 px-4">
+              <ul className="text-white font-semibold">About</ul>
+              <ul className="text-white font-semibold">Contacts</ul>
+              <ul className="text-white font-semibold">Products</ul>
+            </nav>
+            {/* <div className="hidden md:flex w-1/6 items-center justify-end">
               <input
                 type="text"
                 placeholder="Search product..."
-                className="w-full px-4 py-2 bg-white border border-white rounded-lg mx-10 text-black outline-none"
+                className="w-full px-4 py-2 bg-white border border-white rounded-lg  text-black outline-none"
               />
-            </div>
+            </div> */}
             <div className="flex gap-4 items-center">
-              <Link className="font-medium text-white" to={"/cart"}>
+              <Link className="font-medium text-white px-2" to={"/cart"}>
                 Cart{" "}
                 {totalitems > 0 && (
                   <span className="text-white">({totalitems})</span>
@@ -47,7 +52,12 @@ function Navbar() {
         ) : (
           <>
             <img src={logo} alt={logoAlt} className="h-8 w-auto" />
-            <div className="hidden md:flex w-1/2 items-center">
+            <nav className="hidden md:flex w-1/2 items-center gap-20 justify-center py-2 px-4">
+              <ul className="text-white font-semibold">About</ul>
+              <ul className="text-white font-semibold">Contacts</ul>
+              <ul className="text-white font-semibold">Products</ul>
+            </nav>
+            <div className="hidden md:flex w-1/6 items-center justify-end">
               <input
                 type="text"
                 placeholder="Search product..."

@@ -28,7 +28,7 @@ function Cart() {
     return (
       <div>
         <p>Your cart is empty</p>
-        <Link to={"/products"}>Go Shopping</Link>
+        <Link to={"/"}>Go Shopping</Link>
       </div>
     )
   }
