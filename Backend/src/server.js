@@ -15,3 +15,5 @@ pool.query("SELECT NOW()", (err, res) => {
     console.log("DB Connected:", res.rows[0]);
   }
 });
+
+module.exports = app;
