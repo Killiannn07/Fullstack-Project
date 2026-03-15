@@ -17,7 +17,7 @@ pool.query("SELECT NOW()", (err, res) => {
 });
 
 app.use(cors({
-  origin: "https://ian-store.vercel.app/",
+  origin: "https://ian-store.vercel.app",
 }))
 
 module.exports = app;
