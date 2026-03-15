@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCart } from "../../context/CartContext";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
+import api from "../../api/axios";
 
 export default function Cart() {
   const { cart, updateCart, removeCart, fetchCart } = useCart();
@@ -40,6 +41,7 @@ export default function Cart() {
   );
 
   const handleCheckout = async () => {
+    console.log("checkedItems:", checkedItems);
     try {
       setLoading(true);
       const res = await api.post("/order/checkout", {
@@ -49,7 +51,9 @@ export default function Cart() {
       navigate("/orders");
       console.log("Checkout berhasil:", res.data);
     } catch (error) {
-      console.error("Checkout gagal:", error.response?.data?.message);
+      console.error("Checkout gagal full error:", error);
+      console.error("Response data:", error.response?.data);
+      console.error("Status:", error.response?.status);
     } finally {
       setLoading(false);
     }
