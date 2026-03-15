@@ -41,7 +41,8 @@ async function getCartByUser(userId) {
      p.id AS product_id,
      p.name,
      p.price,
-     p.stock, 
+     p.stock,
+     p.image_url,
      c.created_at
      FROM cart c JOIN products p ON c.product_id = p.id
      WHERE c.user_id = $1
