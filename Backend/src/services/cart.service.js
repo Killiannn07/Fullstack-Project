@@ -88,3 +88,4 @@ async function deleteCart(userId, cartId) {
   return result.rows[0]
 }
 module.exports = { addToCart, getCartByUser, updateCart, deleteCart };
+
