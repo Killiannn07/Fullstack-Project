@@ -14,7 +14,19 @@ const orderRoute = require('./routes/order.route')
 const { errorResponse } = require("./utils/response")
 
 const corsOptions = {
-  origin: "https://ian-store.vercel.app",
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "https://ian-store.vercel.app",
+      "http://localhost:5173",
+      "http://localhost:3000"
+    ];
+    
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed'));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
