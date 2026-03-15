@@ -3,7 +3,7 @@ const orderService = require("../services/order.service");
 
 async function getOrders(req, res) {
   try {
-    userId = req.user.id
+    userId = req.user.id;
     const orders = await orderService.getOrdersByUser(userId);
 
     return successResponse(res, "Orders Fetched", orders);
@@ -14,13 +14,13 @@ async function getOrders(req, res) {
 
 async function getOrderDetail(req, res) {
   try {
-    const userId = req.user.id
-    const {orderId} = req.params
+    const userId = req.user.id;
+    const { orderId } = req.params;
     const orders = await orderService.getOrderDetail(orderId, userId);
 
     return successResponse(res, "Orders Detail Fetched", orders);
   } catch (error) {
-    return errorResponse(res, error.message, 500)
+    return errorResponse(res, error.message, 500);
   }
 }
 
@@ -46,8 +46,13 @@ async function getAllOrders(req, res) {
 async function checkout(req, res) {
   try {
     const userId = req.user.id;
-    const result = await orderService.checkout(userId);
 
+    const { cartItemIds } = req.body;
+
+    if (cartItemIds || cartItemIds.length === 0) {
+      return errorResponse(res, "Pilih item terlebih dahulu", 400);
+    }
+    const result = await orderService.checkout(userId, cartItemIds);
     return successResponse(res, "Checkout done", result);
   } catch (error) {
     return errorResponse(res, error.message, 500);

@@ -8,13 +8,13 @@ async function checkout(userId) {
 
     //Ambil Cart
     const cartResult = await client.query(
-      `SELECT c.product_id, c.quantity,
+      `SELECT c.id, c.product_id, c.quantity,
       p.price, p.stock, p.name
       FROM cart c
       JOIN products p ON p.id = c.product_id
-      WHERE c.user_id = $1
+      WHERE c.user_id = $1 AND c.product_id = ANY($2)
       FOR UPDATE`,
-      [userId],
+      [userId, cartItemIds],
     );
 
     
@@ -88,7 +88,7 @@ async function checkout(userId) {
     `);
 
     //Hapus cart
-    await client.query(`DELETE FROM cart WHERE user_id = $1`, [userId]);
+    await client.query(`DELETE FROM cart WHERE user_id = $1 AND product_id = ANY($2)`, [userId, cartItemIds]);
 
     await client.query("COMMIT");
 
