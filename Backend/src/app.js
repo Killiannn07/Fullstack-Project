@@ -13,8 +13,15 @@ const cartRoute = require('./routes/cart.route')
 const orderRoute = require('./routes/order.route')
 const { errorResponse } = require("./utils/response")
 
+const corsOptions = {
+  origin: "https://ian-store.vercel.app",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}
+
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsOptions))
 app.use("/products", productRoute)
 app.use("/auth", authRoute)
 app.use("/cart", cartRoute)
