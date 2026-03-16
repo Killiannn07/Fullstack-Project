@@ -6,6 +6,9 @@ async function checkout(userId) {
   try {
     await client.query(`BEGIN`);
 
+    console.log("UserId:", userId);
+    console.log("Cart item IDs:", cartItemIds);
+
     //Ambil Cart
     const cartResult = await client.query(
       `SELECT c.id, c.product_id, c.quantity,
