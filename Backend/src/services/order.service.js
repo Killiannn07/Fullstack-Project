@@ -20,7 +20,7 @@ async function checkout(userId) {
       [userId, cartItemIds],
     );
 
-    
+    console.log("Cart result:", cartResult.rows);
 
     if (cartResult.rows.length === 0) {
       throw new Error("Cart is empty");
@@ -97,6 +97,7 @@ async function checkout(userId) {
 
     return { success: true, orderId };
   } catch (error) {
+    console.error("Service error:", error);
     await client.query("ROLLBACK");
     throw error;
   } finally {
