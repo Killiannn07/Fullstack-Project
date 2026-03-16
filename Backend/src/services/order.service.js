@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-async function checkout(userId) {
+async function checkout(userId, cartItemIds) {
   const client = await pool.connect();
 
   try {
