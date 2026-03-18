@@ -3,6 +3,7 @@ import { useCart } from "../../context/CartContext";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import api from "../../api/axios";
+import { IoArrowBackCircleSharp } from "react-icons/io5";
 
 export default function Cart() {
   const { cart, updateCart, removeCart, fetchCart } = useCart();
@@ -41,7 +42,7 @@ export default function Cart() {
   );
 
   const handleCheckout = async () => {
-    console.log("checkedItems:", checkedItems);
+    
     try {
       setLoading(true);
       const res = await api.post("/order/checkout", {
@@ -49,7 +50,7 @@ export default function Cart() {
       });
       await fetchCart();
       navigate("/orders");
-      console.log("Checkout berhasil:", res.data);
+      
     } catch (error) {
       console.error("Checkout gagal full error:", error);
       console.error("Response data:", error.response?.data);
@@ -71,9 +72,13 @@ export default function Cart() {
   return (
     <div className="grid grid-cols-3 justify-between">
       <div className="col-span-2 justify-items-start mr-4 bg-white p-4 rounded-lg shadow-md">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="font-bold text-3xl mb-8 ">Cart</h1>
-          <label className="flex items-center gap-2 text-sm text-gray-500 cursor-pointer">
+        <div className="flex flex-row w-full items-end justify-between mb-6">
+          <div className="flex">
+            <button className="text-3xl cursor-pointer"><IoArrowBackCircleSharp/></button>
+            <h1 className="font-bold text-3xl  ">Cart</h1>
+          </div>
+          
+          <label className="flex items-center gap-2 text-md text-gray-500 cursor-pointer">
             <input
               type="checkbox"
               checked={checkedItems.length === cart.length && cart.length > 0}

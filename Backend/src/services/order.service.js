@@ -6,8 +6,7 @@ async function checkout(userId, cartItemIds) {
   try {
     await client.query(`BEGIN`);
 
-    console.log("UserId:", userId);
-    console.log("Cart item IDs:", cartItemIds);
+    
 
     //Ambil Cart
     const cartResult = await client.query(
@@ -20,7 +19,7 @@ async function checkout(userId, cartItemIds) {
       [userId, cartItemIds],
     );
 
-    console.log("Cart result:", cartResult.rows);
+   
 
     if (cartResult.rows.length === 0) {
       throw new Error("Cart is empty");
@@ -97,7 +96,7 @@ async function checkout(userId, cartItemIds) {
 
     return { success: true, orderId };
   } catch (error) {
-    console.error("Service error:", error);
+    
     await client.query("ROLLBACK");
     throw error;
   } finally {

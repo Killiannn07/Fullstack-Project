@@ -40,7 +40,7 @@ function Products() {
         {products && products.length > 0 ? (
           products.map((p) => (
             <div key={p.id} className="shadow-lg bg-white  p-4 rounded-lg mb-3">
-              <div className="h-50  bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center rounded overflow-hidden">
+              <div className="h-50  bg-linear-to-br from-stone-100 to-stone-200 flex items-center justify-center rounded overflow-hidden">
                 {p.image_url ? (
                   <img
                     src={p.image_url}

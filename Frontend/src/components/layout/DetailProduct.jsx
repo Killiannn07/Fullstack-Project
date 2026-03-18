@@ -56,7 +56,7 @@ export default function DetailProduct({ product, onClose, addToCart }) {
             : "opacity-0 translate-y-10 scale-95"
         }`}
       >
-        <div className="h-56 bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center relative">
+        <div className="h-56 bg-linear-to-br from-stone-100 to-stone-200 flex items-center justify-center relative">
           <img
             src={product.image_url}
             alt={product.name}
@@ -77,7 +77,7 @@ export default function DetailProduct({ product, onClose, addToCart }) {
             </p>
           )}
           <div className="border-t border-stone-100 my-4" />
-          <div className="flex items-center grid grid-cols-2 justify-between gap-4">
+          <div className=" items-center grid grid-cols-2 justify-between gap-4">
             <div className="justify-items-start">
               <p className="text-xs text-gray-400 tracking-widest uppercase mb-1 ">
                 Harga

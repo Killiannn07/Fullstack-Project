@@ -49,7 +49,7 @@ async function checkout(req, res) {
 
     const { cartItemIds } = req.body;
 
-    console.log("cartItemIds:", cartItemIds);
+    
 
     if (!cartItemIds || cartItemIds.length === 0) {
       return errorResponse(res, "Pilih item terlebih dahulu", 400);

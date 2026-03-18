@@ -13,7 +13,7 @@ function AppRoutes() {
         <Route path="/" element={<Products/>} />
         <Route path="/cart" element={<ProtectedRoute> <Cart/> </ProtectedRoute>} />
         <Route path="/orders" element={<ProtectedRoute> <Orders/> </ProtectedRoute>} />
-        <Route path="/orders/:orderId" element={<ProtectedRoute> <OrderDetail/> </ProtectedRoute>} />
+        <Route path="/order/:orderId" element={<ProtectedRoute> <OrderDetail/> </ProtectedRoute>} />
         <Route path="/admin/orders" element={<ProtectedRoute> <AdminOrder/> </ProtectedRoute>} />
         
       </Routes>

@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-third px-8 py-12 rounded-2xl shadow-2xl max-w-sm w-full max-h-fit">
+    <div className="bg-third px-8 py-12 rounded-2xl shadow-2xl max-w-sm w-full max-h-fit justify-self-center">
       <form className="flex flex-col gap-4" onSubmit={handleLogin}>
         <h1 className="text-4xl font-bold text-center text-white">Login</h1>
         <h3 className="text-lg font-bold text-center text-gray-300">
