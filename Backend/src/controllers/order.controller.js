@@ -16,8 +16,9 @@ async function getOrderDetail(req, res) {
   try {
     const userId = req.user.id;
     const { orderId } = req.params;
+    console.log("orderId:", orderId, "userId:", userId);
     const orders = await orderService.getOrderDetail(orderId, userId);
-
+    console.log("orders:", orders);
     return successResponse(res, "Orders Detail Fetched", orders);
   } catch (error) {
     return errorResponse(res, error.message, 500);
