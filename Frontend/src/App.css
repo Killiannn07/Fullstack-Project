@@ -49,13 +49,18 @@ html, body {
 }
 
 body {
-  background-color: #DCD7C9;
+  background-color: #F5F0EB;
 }
 
 @theme {
-  --color-primary: #2c3639;
-  --color-secondary: #3F4E4F;
-  --color-third: #A27B5C;
-  --color-fourth: #DCD7C9;
+  --color-background: #F5F0EB;
+  --color-surface: #FFFFFF;
+  --color-primary: #1A1A2E;
+  --color-primary-hover: #2D2D4E;
+  --color-accent: #9A7D5A;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+  --color-border: #EDE8E0;
 }
 

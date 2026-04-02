@@ -34,12 +34,12 @@ function Products() {
 
   return (
     <div className="max-w-6xl mx-auto py-4">
-      <h1 className="text-xl font-semibold mb-4 text-primary">Products</h1>
+      <h1 className="text-xl font-semibold mb-4 text-text-primary">Products</h1>
       {error && <div className="text-red-500 text-center mb-4">{error}</div>}
       <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5 min-w-6xl">
         {products && products.length > 0 ? (
           products.map((p) => (
-            <div key={p.id} className="shadow-lg bg-white  p-4 rounded-lg mb-3">
+            <div key={p.id} className="shadow-lg bg-surface  p-4 rounded-lg mb-3">
               <div className="h-50  bg-linear-to-br from-stone-100 to-stone-200 flex items-center justify-center rounded overflow-hidden">
                 {p.image_url ? (
                   <img
@@ -48,7 +48,7 @@ function Products() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="text-gray-400 text-sm text-center">
+                  <div className="text-text-secondary text-sm text-center">
                     No Image
                   </div>
                 )}

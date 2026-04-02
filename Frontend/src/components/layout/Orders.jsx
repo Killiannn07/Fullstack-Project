@@ -99,6 +99,23 @@ export default function Orders() {
           Order history and status updates will appear here.
         </p>
       </div>
+      <button
+        onClick={() => navigate("/")}
+        className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-700 transition-colors mb-6 cursor-pointer"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        >
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        Back to Home
+      </button>
       <div className="flex flex-col gap-4">
         {orders.map((o) => {
           const status = statusConfig[o.status] || {
@@ -133,7 +150,7 @@ export default function Orders() {
                 </p>
 
                 <div className="text-center ">
-                  <p className="text-base font-bold text-slate-900">
+                  <p className="text-base font-bold text-accent">
                     {formatCurrencyRp(o.total_price)}
                   </p>
                   <p className="text-xs text-slate-500">

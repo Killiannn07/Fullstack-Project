@@ -176,7 +176,7 @@ export default function Cart() {
               {/* Total price */}
               <div className="flex justify-between font-bold text-lg">
                 <span>Total</span>
-                <span className="text-amber-700">
+                <span className="text-accent">
                   Rp {totalPrice.toLocaleString("id-ID")}
                 </span>
               </div>

@@ -6,10 +6,13 @@ import Cart from "../pages/Cart";
 import Orders from "../pages/Orders";
 import OrderDetail from "../pages/OrderDetail";
 import AdminOrder from "../pages/AdminOrder";
+import Register from "../pages/Register";
+
 function AppRoutes() {
   return (
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/" element={<Products/>} />
         <Route path="/cart" element={<ProtectedRoute> <Cart/> </ProtectedRoute>} />
         <Route path="/orders" element={<ProtectedRoute> <Orders/> </ProtectedRoute>} />

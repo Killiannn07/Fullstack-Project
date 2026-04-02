@@ -50,7 +50,7 @@ export default function DetailProduct({ product, onClose, addToCart }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl transition-all duration-300 ${
+        className={`bg-surface rounded-2xl w-full max-w-md overflow-hidden shadow-2xl transition-all duration-300 ${
           visible
             ? "opacity-100 translate-y-0 scale-100"
             : "opacity-0 translate-y-10 scale-95"
@@ -82,7 +82,7 @@ export default function DetailProduct({ product, onClose, addToCart }) {
               <p className="text-xs text-gray-400 tracking-widest uppercase mb-1 ">
                 Harga
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-accent">
                 Rp {Number(product.price).toLocaleString("id-ID")}
               </p>
             </div>

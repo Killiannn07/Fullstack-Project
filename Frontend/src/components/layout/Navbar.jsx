@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <div className="flex justify-center py-4">
-      <div className="bg-third shadow-xl max-w-6xl w-full rounded-lg px-4 py-3 flex justify-between items-center">
+      <div className="bg-primary shadow-xl max-w-6xl w-full rounded-lg px-4 py-3 flex justify-between items-center">
         {user ? (
           <>
             <img src={logo} alt={logoAlt} className="h-8 w-auto" />
