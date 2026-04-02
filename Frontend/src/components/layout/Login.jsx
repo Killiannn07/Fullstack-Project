@@ -96,12 +96,15 @@ export default function Login() {
         <Button type="submit" disabled={loading}>
           {loading ? "Loading..." : "Login"}
         </Button>
-        <p className="font-semibold">
-          Don' t have an account?{" "}
-          <Link to="/register" className="font-bold underline hover:text-primary-hover">
-            Register
+
+        <div className="flex justify-between text-sm text-text-primary">
+          <Link to="/forgot-password" className="underline hover:text-primary-hover">
+            Lupa Password?
           </Link>
-        </p>
+          <Link to="/register" className="underline hover:text-primary-hover">
+            Belum punya akun?
+          </Link>
+        </div>
       </form>
     </div>
   );

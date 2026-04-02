@@ -1,40 +1,44 @@
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api/axios";
-import { Link, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
-import { FaUser } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
-export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function ResetPassword() {
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
+  const { resetToken } = useParams();
 
-  const handleRegister = async (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
-    if (!email || !password || !confirmPassword) {
+    // Validasi form
+    if (!newPassword || !confirmPassword) {
       setError("Semua field harus diisi");
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setError("Password dan konfirmasi password tidak cocok");
       return;
     }
 
-    if (password.length < 6) {
-      setError("Password harus minimal 6 karakter");
+    // Validasi password minimal 6 karakter
+    if (newPassword.length < 6) {
+      setError("Password minimal 6 karakter");
       return;
     }
 
-    const hasLetter = /[a-zA-Z]/.test(password);
-    const hasNumber = /[0-9]/.test(password);
+    // Validasi password harus ada huruf dan angka
+    const hasLetter = /[a-zA-Z]/.test(newPassword);
+    const hasNumber = /[0-9]/.test(newPassword);
 
     if (!hasLetter || !hasNumber) {
       setError("Password harus berisi huruf dan angka");
@@ -43,12 +47,20 @@ export default function Register() {
 
     try {
       setLoading(true);
-      const res = await api.post("/auth/register", { email, password });
-      navigate("/login");
+      const res = await api.post(`/auth/reset-password/${resetToken}`, {
+        newPassword,
+        confirmPassword,
+      });
+      setSuccess("Password berhasil direset! Redirect ke login...");
+      
+      // Redirect ke login setelah 2 detik
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
-      const errormessage =
-        error.response?.data?.message || "Gagal mendaftar. Silakan coba lagi.";
-      setError(errormessage);
+      const errorMessage =
+        error.response?.data?.message || "Gagal reset password";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -56,12 +68,12 @@ export default function Register() {
 
   return (
     <div className="bg-surface px-8 py-12 rounded-2xl shadow-2xl max-w-sm w-full max-h-fit justify-self-center">
-      <form className="flex flex-col gap-4" onSubmit={handleRegister}>
+      <form className="flex flex-col gap-4" onSubmit={handleResetPassword}>
         <h1 className="text-4xl font-bold text-center text-text-primary">
-          Register
+          Reset Password
         </h1>
         <h3 className="text-lg font-bold text-center text-text-secondary">
-          Create an account!
+          Masukkan password baru Anda
         </h3>
 
         {error && (
@@ -70,29 +82,22 @@ export default function Register() {
           </div>
         )}
 
+        {success && (
+          <div className="bg-green-500 text-white p-3 rounded-lg text-sm">
+            {success}
+          </div>
+        )}
+
         <div className="relative w-full">
-          <h3 className="py-2 flex justify-start text-text-primary">Email</h3>
-          <input
-            className="w-full h-full bg-white py-2 pl-2 pr-8 border border-fourth focus:ring-ring focus:ring-1 rounded-xl outline-none"
-            placeholder="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={loading}
-            required
-          />
-          <FaUser className="absolute right-3 top-15 -translate-y-1/2 text-black"></FaUser>
-        </div>
-        <div className="relative w-full">
-          <h3 className="py-2 flex justify-start text-text-primary ">
-            Password
+          <h3 className="py-2 flex justify-start text-text-primary">
+            Password Baru
           </h3>
           <input
             className="w-full h-full bg-white py-2 pl-2 pr-8 border border-fourth focus:ring-ring focus:ring-1 rounded-xl outline-none"
-            placeholder="Password"
+            placeholder="Password Baru"
             type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
             disabled={loading}
             required
           />
@@ -105,13 +110,14 @@ export default function Register() {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
+
         <div className="relative w-full">
-          <h3 className="py-2 flex justify-start text-text-primary ">
-            Confirm Password
+          <h3 className="py-2 flex justify-start text-text-primary">
+            Konfirmasi Password
           </h3>
           <input
             className="w-full h-full bg-white py-2 pl-2 pr-8 border border-fourth focus:ring-ring focus:ring-1 rounded-xl outline-none"
-            placeholder="Confirm Password"
+            placeholder="Konfirmasi Password"
             type={showPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -128,18 +134,14 @@ export default function Register() {
           </button>
         </div>
 
+        <div className="text-sm text-text-secondary">
+          <p>✓ Minimal 6 karakter</p>
+          <p>✓ Harus ada huruf dan angka</p>
+        </div>
+
         <Button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Register"}
+          {loading ? "Mereset..." : "Reset Password"}
         </Button>
-        <p className="font-semibold">
-          Do you have an account?{" "}
-          <Link
-            to="/login"
-            className="font-bold underline hover:text-primary-hover"
-          >
-            Login
-          </Link>
-        </p>
       </form>
     </div>
   );
