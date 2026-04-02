@@ -51,10 +51,10 @@ async function forgotPassword(req, res, next) {
 
 async function resetPassword(req, res, next) {
   try {
-    const { resetToken } = req.params;
+    const { token } = req.query;
     const { newPassword, confirmPassword } = req.body;
 
-    if (!resetToken) {
+    if (!token) {
       return errorResponse(res, "Reset token required", 400);
     }
 
@@ -78,7 +78,7 @@ async function resetPassword(req, res, next) {
       return errorResponse(res, "Password harus berisi huruf dan angka", 400);
     }
 
-    const result = await authService.resetPassword(resetToken, newPassword);
+    const result = await authService.resetPassword(token, newPassword);
 
     return successResponse(res, result.message, result, 200);
   } catch (error) {

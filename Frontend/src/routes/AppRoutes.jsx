@@ -16,7 +16,7 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Products/>} />
         <Route path="/cart" element={<ProtectedRoute> <Cart/> </ProtectedRoute>} />
         <Route path="/orders" element={<ProtectedRoute> <Orders/> </ProtectedRoute>} />

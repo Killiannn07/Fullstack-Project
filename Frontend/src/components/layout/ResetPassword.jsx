@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import api from "../../api/axios";
 import Button from "../ui/Button";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -12,12 +12,19 @@ export default function ResetPassword() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
-  const { resetToken } = useParams();
+  const [searchParams] = useSearchParams();
+  const resetToken = searchParams.get("token");
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
+
+    // Validasi token
+    if (!resetToken) {
+      setError("Reset token tidak valid atau expired");
+      return;
+    }
 
     // Validasi form
     if (!newPassword || !confirmPassword) {
@@ -47,7 +54,7 @@ export default function ResetPassword() {
 
     try {
       setLoading(true);
-      const res = await api.post(`/auth/reset-password/${resetToken}`, {
+      const res = await api.post(`/auth/reset-password?token=${resetToken}`, {
         newPassword,
         confirmPassword,
       });
