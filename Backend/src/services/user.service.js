@@ -30,6 +30,37 @@ async function deleteUser(id) {
   return result.rows[0];
 }
 
+async function updateResetToken(email, resetToken, resetTokenExpiry) {
+  const result = await pool.query(
+    "UPDATE users SET resetToken = $1, resetTokenExpiry = $2 WHERE email = $3 RETURNING *",
+    [resetToken, resetTokenExpiry, email],
+  );
+  return result.rows[0];
+}
 
+async function getUserByResetToken(resetToken) {
+  const result = await pool.query(
+    "SELECT * FROM users WHERE resetToken = $1 AND resetTokenExpiry > NOW()",
+    [resetToken],
+  );
+  return result.rows[0];
+}
 
-module.exports = { getAllUsers, getUsersByEmail, getUsersById, createUser, deleteUser };
+async function updatePassword(id, hashedPassword) {
+  const result = await pool.query(
+    "UPDATE users SET password = $1, resetToken = NULL, resetTokenExpiry = NULL WHERE id = $2 RETURNING *",
+    [hashedPassword, id],
+  );
+  return result.rows[0];
+}
+
+module.exports = {
+  getAllUsers,
+  getUsersByEmail,
+  getUsersById,
+  createUser,
+  deleteUser,
+  updateResetToken,
+  getUserByResetToken,
+  updatePassword,
+};
