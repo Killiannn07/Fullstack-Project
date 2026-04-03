@@ -23,19 +23,25 @@ function Navbar() {
       <div className="bg-primary shadow-xl max-w-6xl w-full rounded-lg px-4 py-3 flex justify-between items-center">
         {user ? (
           <>
-            <img src={logo} alt={logoAlt} className="h-8 w-auto" />
+            <img src={logo} alt={logoAlt} onClick={() => navigate("/")} className="h-8 w-auto cursor-pointer" />
             <nav className="hidden md:flex w-1/2 items-center gap-20 justify-center py-2 px-4">
               <ul className="text-white font-semibold">About</ul>
               <ul className="text-white font-semibold">Contacts</ul>
-              <ul className="text-white font-semibold">Products</ul>
+              <ul className="text-white font-semibold" onClick={() => navigate("/orders")}>My Orders</ul>
             </nav>
             <div className="flex gap-4 items-center">
-              <Link className="font-medium text-white px-2" to={"/cart"}>
-                Cart{" "}
-                {totalitems > 0 && (
-                  <span className="text-white">({totalitems})</span>
-                )}
-              </Link>
+              {user.role === "admin" ? (
+                <Link className="font-medium text-white px-2" to={"/admin/orders"}>
+                  Orders
+                </Link>
+              ) : (
+                <Link className="font-medium text-white px-2" to={"/cart"}>
+                  Cart{" "}
+                  {totalitems > 0 && (
+                    <span className="text-white">({totalitems})</span>
+                  )}
+                </Link>
+              )}
               <Button onClick={handleLogout}>Logout</Button>
             </div>
           </>
@@ -43,9 +49,9 @@ function Navbar() {
           <>
             <img src={logo} alt={logoAlt} className="h-8 w-auto" />
             <nav className="hidden md:flex w-1/2 items-center gap-20 justify-center py-2 px-4">
-              <ul className="text-white font-semibold">About</ul>
-              <ul className="text-white font-semibold">Contacts</ul>
-              <ul className="text-white font-semibold">Products</ul>
+              <ul className="text-white font-semibold cursor-pointer">About</ul>
+              <ul className="text-white font-semibold cursor-pointer">Contacts</ul>
+              <ul className="text-white font-semibold cursor-pointer">Products</ul>
             </nav>
             <div className="flex gap-4 items-center">
               <Button onClick={() => navigate("/login")}>Login</Button>
