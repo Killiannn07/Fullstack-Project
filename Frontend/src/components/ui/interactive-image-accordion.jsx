@@ -91,7 +91,7 @@ export function LandingAccordionItem() {
               Ian Store was built for people who know what they want quality, style, and comfort without compromise.
             </p>
             <div className="mt-8">
-              <Button>Explore Now</Button>
+              <Button onclick={() => {}}>Explore Now</Button>
             </div>
           </div>
 
