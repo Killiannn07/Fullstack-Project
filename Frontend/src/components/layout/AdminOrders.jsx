@@ -24,6 +24,7 @@ export default function AdminOrder() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState({});
+  const [error, setError] = useState(null);
  
   const fetchOrders = async () => {
     const res = await api.get("/order/admin/all");
@@ -37,9 +38,18 @@ export default function AdminOrder() {
  
   const updateStatus = async (orderId, status) => {
     setUpdating((prev) => ({ ...prev, [orderId]: true }));
-    await api.patch(`/order/${orderId}/status`, { status });
-    await fetchOrders();
-    setUpdating((prev) => ({ ...prev, [orderId]: false }));
+    setError(null);
+    
+    try {
+      await api.patch(`/order/${orderId}/status`, { status });
+      await fetchOrders();
+    } catch (err) {
+      setError(err.response?.data?.message || "Gagal update status");
+      // Kembalikan ke nilai sebelumnya (refresh data)
+      await fetchOrders();
+    } finally {
+      setUpdating((prev) => ({ ...prev, [orderId]: false }));
+    }
   };
  
   if (loading) {
@@ -58,6 +68,16 @@ export default function AdminOrder() {
  
   return (
     <div className="max-w-5xl mx-auto p-6">
+      {/* Error message */}
+      {error && (
+        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-700 text-sm font-medium">⚠️ {error}</p>
+          <p className="text-red-600 text-xs mt-1">
+            Status hanya bisa berubah satu arah: Pending → On Delivery → Completed
+          </p>
+        </div>
+      )}
+
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Admin Orders</h1>

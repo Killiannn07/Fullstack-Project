@@ -25,9 +25,9 @@ function Navbar() {
           <>
             <img src={logo} alt={logoAlt} onClick={() => navigate("/")} className="h-8 w-auto cursor-pointer" />
             <nav className="hidden md:flex w-1/2 items-center gap-20 justify-center py-2 px-4">
-              <ul className="text-white font-semibold">About</ul>
-              <ul className="text-white font-semibold">Contacts</ul>
-              <ul className="text-white font-semibold" onClick={() => navigate("/orders")}>My Orders</ul>
+              <ul className="text-white font-semibold cursor-pointer">About</ul>
+              <ul className="text-white font-semibold cursor-pointer">Contacts</ul>
+              <ul className="text-white font-semibold cursor-pointer" onClick={() => navigate("/orders")}>My Orders</ul>
             </nav>
             <div className="flex gap-4 items-center">
               {user.role === "admin" ? (
@@ -47,11 +47,11 @@ function Navbar() {
           </>
         ) : (
           <>
-            <img src={logo} alt={logoAlt} className="h-8 w-auto" />
+            <img src={logo} alt={logoAlt} onClick={() => navigate("/")} className="h-8 w-auto cursor-pointer" />
             <nav className="hidden md:flex w-1/2 items-center gap-20 justify-center py-2 px-4">
               <ul className="text-white font-semibold cursor-pointer">About</ul>
               <ul className="text-white font-semibold cursor-pointer">Contacts</ul>
-              <ul className="text-white font-semibold cursor-pointer">Products</ul>
+              <ul className="text-white font-semibold cursor-pointer" onClick={() => navigate("/")}>Products</ul>
             </nav>
             <div className="flex gap-4 items-center">
               <Button onClick={() => navigate("/login")}>Login</Button>

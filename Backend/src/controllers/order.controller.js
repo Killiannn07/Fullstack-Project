@@ -26,12 +26,16 @@ async function getOrderDetail(req, res) {
 }
 
 async function updateStatus(req, res) {
-  const { orderId } = req.params;
-  const { status } = req.body;
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
 
-  const result = await orderService.updateOrderStatus(orderId, status);
+    const result = await orderService.updateOrderStatus(orderId, status);
 
-  return successResponse(res, result.message);
+    return successResponse(res, result.message);
+  } catch (error) {
+    return errorResponse(res, error.message || "Failed to update order status", 400);
+  }
 }
 
 async function getAllOrders(req, res) {
